@@ -1,0 +1,295 @@
+/* ==========================================
+   1. Box Model & Global Reset (20%)
+   ========================================== */
+*, *::before, *::after {
+    box-sizing: border-box; /* ตรงตามเกณฑ์ Box Model */
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================
+   2. Typography & Colour Scheme (โทนสีฟ้า) (20%)
+   ========================================== */
+:root {
+    --primary-blue: #1e3a8a;    /* ฟ้าเข้มโทนสถาบัน/วิชาการ */
+    --accent-blue: #0284c7;     /* ฟ้าสดใสสำหรับปุ่ม/ไฮไลต์ */
+    --light-blue: #e0f2fe;      /* ฟ้าอ่อนพื้นหลังการ์ดย่อย */
+    --bg-color: #f0f9ff;        /* ฟ้าอ่อนละมุนพื้นหลังเว็บ */
+    --card-bg: #ffffff;         /* พื้นหลังขาวสำหรับการ์ด */
+    --text-dark: #1e293b;       /* ตัวหนังสือสีเข้มอ่านง่าย */
+    --text-muted: #64748b;      /* สีข้อความรอง */
+    --border-color: #bae6fd;   /* สีเส้นขอบฟ้าอ่อน */
+}
+
+body {
+    font-family: 'Segoe UI', Prompt, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.7;
+}
+
+/* ==========================================
+   3. Selectors & Hierarchy (25%)
+   (Element, Class ., และ ID #)
+   ========================================== */
+
+/* ID Selector: #main-header */
+#main-header {
+    background: linear-gradient(135deg, #1e3a8a, #0284c7);
+    color: #ffffff;
+    text-align: center;
+    padding: 45px 20px;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+}
+
+#main-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Class Selector: .subtitle */
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Element Selectors */
+h2 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--accent-blue);
+    display: inline-block;
+}
+
+h3 {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* ==========================================
+   4. Card Component & :hover State (20%)
+   ========================================== */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* เตรียมไว้ทำ :hover */
+}
+
+/* :hover state สำหรับ Card */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15);
+}
+
+.profile-card {
+    text-align: center;
+}
+
+.profile-img {
+    width: 220px;
+    height: auto;
+    border-radius: 12px;
+    border: 4px solid var(--accent-blue);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 15px auto 20px auto;
+    display: block;
+}
+
+.intro-text {
+    font-size: 1.05rem;
+    text-align: justify;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.sub-card {
+    background-color: var(--light-blue);
+    border-left: 4px solid var(--accent-blue);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+    margin-top: 15px;
+}
+
+/* Hobbies Section Styling */
+.hobby-list {
+    list-style: none;
+}
+
+.hobby-item {
+    background-color: #f8fafc;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #e2e8f0;
+}
+
+.hobby-item strong {
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.img-gallery {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.img-gallery img {
+    width: 130px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+/* :hover สำหรับรูปภาพในแกลเลอรี */
+.img-gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Schedule Table Styling */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.schedule-table caption {
+    padding: 10px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+}
+
+.schedule-table th {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 600;
+}
+
+.schedule-table td {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.schedule-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.day-col {
+    font-weight: bold;
+    color: var(--primary-blue);
+    background-color: var(--light-blue) !important;
+}
+
+.lunch-col {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+}
+
+.free-col {
+    color: #16a34a; /* สีเขียวสำหรับเวลาว่าง */
+    font-weight: 500;
+}
+
+/* W3C Section */
+.w3c-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 15px;
+}
+
+.status-pass {
+    color: #16a34a;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.link-btn {
+    color: var(--accent-blue);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   5. Buttons & Footer Link Styling (:hover)
+   ========================================== */
+#contact {
+    background-color: #0f172a;
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+    margin-top: 40px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* :hover state สำหรับปุ่มกด */
+.btn:hover {
+    background-color: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+}
+
+/* :active state สำหรับจังหวะคลิกปุ่มย่อลง */
+.btn:active {
+    transform: scale(0.95);
+}
+
+.copyright {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
