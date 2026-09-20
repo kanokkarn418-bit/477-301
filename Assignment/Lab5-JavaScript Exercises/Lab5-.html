@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แบบฝึกหัดวิชาโปรแกรมมิ่ง - JavaScript</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bs-body-bg: #0f172a;
+      --bs-body-color: #f8fafc;
+      --font-main: 'Plus Jakarta Sans', 'Sarabun', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bs-body-bg);
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+      min-height: 100vh;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+      border-color: rgba(99, 102, 241, 0.4) !important;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .btn-gradient:hover {
+      opacity: 0.9;
+      color: #fff;
+    }
+
+    .form-control {
+      background-color: rgba(15, 23, 42, 0.6) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+    }
+
+    .form-control:focus {
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+    }
+
+    .result-box {
+      background: rgba(15, 23, 42, 0.8);
+      border-left: 4px solid #06b6d4;
+    }
+  </style>
+</head>
+<body class="py-5">
+
+  <div class="container">
+    <!-- Header -->
+    <header class="text-center mb-5">
+      <span class="badge bg-indigo-subtle text-indigo border border-indigo-subtle rounded-pill px-3 py-2 mb-3">
+        <i class="fa-solid fa-graduation-cap me-1"></i> ตรวจแล้ว (Bootstrap 5)
+      </span>
+      <h1 class="display-4 fw-extrabold gradient-text">แดชบอร์ดระบบคำนวณสั่งซื้อ</h1>
+      <p class="text-secondary">รวมโปรแกรมคำนวณยอดและเงื่อนไขการขาย </p>
+    </header>
+
+    <!-- Cards Grid -->
+    <div class="row g-4">
+      <!-- 1. Order Calculator -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card glass-card h-100 p-3 text-light">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold pb-2 border-bottom border-secondary border-opacity-25 mb-3">
+              <i class="fa-solid fa-calculator text-info me-2"></i>1. คำนวณคำสั่งซื้อ
+            </h5>
+            <div class="mb-3">
+              <label class="form-label text-secondary small fw-semibold">ราคาต่อชิ้น (บาท)</label>
+              <input type="number" class="form-control" id="calcPrice" value="250" min="0">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-secondary small fw-semibold">จำนวนสินค้า</label>
+              <input type="number" class="form-control" id="calcQty" value="3" min="1">
+            </div>
+            <button class="btn btn-gradient w-100 mt-auto" onclick="runOrderCalculator()">คำนวณราคารวม</button>
+            <div class="result-box p-3 rounded mt-3" id="calcResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Delivery Rule -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card glass-card h-100 p-3 text-light">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold pb-2 border-bottom border-secondary border-opacity-25 mb-3">
+              <i class="fa-solid fa-truck-fast text-info me-2"></i>2. คำนวณค่าจัดส่ง
+            </h5>
+            <div class="mb-3">
+              <label class="form-label text-secondary small fw-semibold">ยอดซื้อในตะกร้า (บาท)</label>
+              <input type="number" class="form-control" id="cartAmount" value="650" min="0">
+            </div>
+            <button class="btn btn-gradient w-100 mt-auto" onclick="runDeliveryRule()">ตรวจสอบค่าส่ง</button>
+            <div class="result-box p-3 rounded mt-3" id="deliveryResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Cart Total -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card glass-card h-100 p-3 text-light">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold pb-2 border-bottom border-secondary border-opacity-25 mb-3">
+              <i class="fa-solid fa-cart-shopping text-info me-2"></i>3. รวมราคาสินค้าในตะกร้า
+            </h5>
+            <div class="mb-3">
+              <label class="form-label text-secondary small fw-semibold">ราคาสินค้า (ใส่คั่นด้วยเครื่องหมาย ,)</label>
+              <input type="text" class="form-control" id="cartPricesInput" value="120, 450, 89, 320, 150">
+            </div>
+            <button class="btn btn-gradient w-100 mt-auto" onclick="runCartTotal()">รวมราคาสินค้าทั้งหมด</button>
+            <div class="result-box p-3 rounded mt-3" id="cartTotalResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Discount Function -->
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="card glass-card h-100 p-3 text-light">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold pb-2 border-bottom border-secondary border-opacity-25 mb-3">
+              <i class="fa-solid fa-tags text-info me-2"></i>4. ฟังก์ชันคำนวณส่วนลด
+            </h5>
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label text-secondary small fw-semibold">จำนวนเงิน (บาท)</label>
+                <input type="number" class="form-control" id="discAmount" value="1500">
+              </div>
+              <div class="col-6">
+                <label class="form-label text-secondary small fw-semibold">ส่วนลด (%)</label>
+                <input type="number" class="form-control" id="discPercent" value="15">
+              </div>
+            </div>
+            <button class="btn btn-gradient w-100 mt-auto" onclick="runDiscountFunction()">คำนวณส่วนลด</button>
+            <div class="result-box p-3 rounded mt-3" id="discountResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Product Objects -->
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="card glass-card h-100 p-3 text-light">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold pb-2 border-bottom border-secondary border-opacity-25 mb-3">
+              <i class="fa-solid fa-boxes-stacked text-info me-2"></i>5. รายการสินค้าในระบบ
+            </h5>
+            <div class="list-group list-group-flush bg-transparent" id="productList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer / AI Log -->
+    <footer class="text-center p-4 card glass-card mt-5 text-light">
+      <p class="fw-semibold text-secondary mb-1">ความคิดเห็นและ AI บันทึก:</p>
+      <code class="text-info bg-dark bg-opacity-75 p-2 rounded d-inline-block border border-secondary border-opacity-25">
+        บันทึกระบบ: ปรับปรุงหน้าจอด้วย Bootstrap 5 ตกแต่งธีมมืดและแปลภาษาไทยรองรับระบบการทำงานของ script.js
+      </code>
+    </footer>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
